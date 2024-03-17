@@ -1,6 +1,6 @@
 --CRIANDO AS TABELAS
 
-create table comprador(  
+create table comprador(  --ok
     CPF varchar(11),
     nome varchar(100),
     socialInsta varchar(100),
@@ -8,20 +8,20 @@ create table comprador(
     constraint PK_comprador primary key (CPF)
 );
 
-create table contatoComprador( 
+create table contatoComprador( --ok
     CPF varchar(11),
     numeroContato varchar(14),
     constraint PK_contatoComprador primary key (CPF, numeroContato),
     constraint FK_contato_comprador foreign key (CPF) references comprador on delete cascade
 );
 
-create table destino(
+create table destino( --ok
     ID varchar(11),
     nome varchar(100),
     constraint PK_destino primary key (ID)
 );
 
-create table pacote( 
+create table pacote( --ok
     cod varchar(11),
     dtIda date,
     dtVolta date,
@@ -30,7 +30,7 @@ create table pacote(
     constraint FK_pacote_destino foreign key (IDdestino) references destino on delete cascade
 );
 
-create table pacoteNacional( 
+create table pacoteNacional( --ok
     codN varchar(11),
     valorRS number,
     constraint PK_pacoteNacional primary key (codN),
@@ -38,30 +38,28 @@ create table pacoteNacional(
 );
 
 
-create table pacoteInternacional( 
+create table pacoteInternacional( --ok
     codI varchar(11),
     valorUS number,
     constraint PK_pacoteInternacional primary key (codI),
     constraint FK_pacoteInternacional_pacote foreign key (codI) references pacote on delete cascade
 );
 
+create table seguro( --ok
+    ID varchar(11),
+    valor number,
+    constraint PK_seguro primary key (ID)
+);
+
 create table compra(
     codPacote varchar(11),
     CPFcomprador varchar(11),
     dtCompra date NOT NULL,
+    idSeguro varchar(11),
     constraint PK_compra primary key (codPacote, CPFcomprador),
     constraint FK_compra_pacote foreign key (codPacote) references pacote on delete cascade,
+    constraint FK_compra_seguro foreign key (idSeguro) references seguro on delete cascade,
     constraint FK_compra_comprador foreign key (CPFcomprador) references comprador on delete cascade
-);
-
-create table seguro( --ok
-    ID varchar(11),
-    valor number,
-    CPFcomprador varchar(11) NOT NULL UNIQUE,
-    codPacote varchar(11) NOT NULL UNIQUE,
-    constraint PK_seguro primary key (ID),
-    constraint FK_seguro_pacote foreign key (codPacote) references pacote on delete cascade,
-    constraint FK_seguro_comprador foreign key (CPFcomprador) references comprador on delete cascade
 );
 
 create table hotel( --ok
@@ -81,7 +79,9 @@ create table bonificacao(
 create table funcionario(
     CPF varchar(11),
     salario number,
-    constraint PK_funcionario primary key (CPF)
+    chefe varchar(11),
+    constraint PK_funcionario primary key (CPF),
+    constraint FK_chefe_funcionario foreign key (chefe) references funcionario on delete cascade
 );
 
 create table contatoFuncionario(
@@ -91,24 +91,10 @@ create table contatoFuncionario(
     constraint FK_contato_funcionario foreign key (CPF) references funcionario on delete cascade
 );
 
-create table chefe( --nao tenho certeza
-    CPFchefe varchar(11),
-    constraint PK_chefe primary key (CPFchefe),
-    constraint FK_chefe_funcionario foreign key (CPFchefe) references funcionario on delete cascade
-);
-
-create table subordinado( --nao tenho certeza
-    CPFsubordinado varchar(11),
-    CPFchefe varchar(11),
-    constraint PK_subordinado primary key (CPFsubordinado),
-    constraint FK_subordinado_chefe foreign key (CPFchefe) references chefe on delete cascade,
-    constraint FK_subordinado_funcionario foreign key (CPFsubordinado) references funcionario on delete cascade
-);
-
 create table vendido(
     codPacote varchar(11),
     CPFfuncionario varchar(11),
-    codBonificacao varchar(11),
+    codBonificacao varchar(11) UNIQUE,
     constraint PK_vendido primary key (codPacote, CPFfuncionario),
     constraint FK_vendido_pacote foreign key (codPacote) references pacote on delete cascade,
     constraint FK_vendido_funcionario foreign key (CPFfuncionario) references funcionario on delete cascade,
