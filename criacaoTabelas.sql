@@ -88,7 +88,7 @@ create table contatoFuncionario(
     CPF varchar(11),
     numeroContato varchar(14),
     constraint PK_contatoFuncionario primary key (CPF, numeroContato),
-    constraint FK_contato_funcionario foreign key (CPF) references funcionario on delete cascade
+    constraint FK_contato_funcionario foreign key (CPF) references funcionario
 );
 
 create table vendido(
