@@ -81,14 +81,14 @@ create table funcionario(
     salario number,
     chefe varchar(11),
     constraint PK_funcionario primary key (CPF),
-    constraint FK_chefe_funcionario foreign key (chefe) references funcionario on delete cascade
+    constraint FK_chefe_funcionario foreign key (chefe) references funcionario ON DELETE SET NULL
 );
 
 create table contatoFuncionario(
     CPF varchar(11),
     numeroContato varchar(14),
     constraint PK_contatoFuncionario primary key (CPF, numeroContato),
-    constraint FK_contato_funcionario foreign key (CPF) references funcionario
+    constraint FK_contato_funcionario foreign key (CPF) references funcionario on delete cascade
 );
 
 create table vendido(
