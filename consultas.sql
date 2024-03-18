@@ -4,7 +4,7 @@ select f.nome, count(*)
 from funcionario f inner join 
 vendido v on v.CPFfuncionario = f.CPF
 group by f.nome
-having count(*) > 3;
+having count(*) > 2;
 
 -- Junção interna
 -- Pacotes vendidos por funcionarios
