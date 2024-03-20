@@ -63,3 +63,12 @@ from (select p1.codPacote from vendido p1 where p1.CPFfuncionario = '2012')
 INTERSECT 
 (select p2.codPacote from vendido p2 where p2.CPFfuncionario = '2014');
 
+
+
+--EXTRA
+-- Quais pacotes foram vendidos e comprados
+select distinct p.cod, comp.nome
+from pacote p inner join 
+compra c on p.cod = c.codPacote inner join
+vendido v on v.codPacote = c.codPacote inner join
+comprador comp on comp.CPF = c.CPFcomprador;
