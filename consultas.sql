@@ -44,11 +44,11 @@ where h.valor >= all (select valor
 
 
 -- Subconsulta do tipo linha
--- projetar dtIDA do pacote que vai para buenos aires
-select dtIDA
-from pacote
-where (dtVolta, IDdestino) = (select p.dtVolta, p.IDdestino
-                        from pacote p where p.IDdestino = '0014' and p.dtVolta = TO_DATE('18/03/2025','DD/MM/YYYY'));
+--projetar cod, dtida, dtvolta e idDestino do pacote comprado pela pessoa de cpf '1111'
+select p.cod, p.dtIda, p.dtVolta, p.idDestino
+from pacote p inner join compra c
+on p.cod = c.codPacote
+where c.CPFcomprador = '1111';
 
 -- Subconsulta do tipo tabela
 -- nome dos destinos que estao em algum pacote
