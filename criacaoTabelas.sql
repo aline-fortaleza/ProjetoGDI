@@ -1,6 +1,6 @@
 --CRIANDO AS TABELAS
 
-create table comprador(  --ok
+create table comprador(  
     CPF varchar(11),
     nome varchar(100),
     socialInsta varchar(100),
@@ -8,20 +8,20 @@ create table comprador(  --ok
     constraint PK_comprador primary key (CPF)
 );
 
-create table contatoComprador( --ok
+create table contatoComprador( 
     CPF varchar(11),
     numeroContato varchar(14),
     constraint PK_contatoComprador primary key (CPF, numeroContato),
     constraint FK_contato_comprador foreign key (CPF) references comprador on delete cascade
 );
 
-create table destino( --ok
+create table destino( 
     ID varchar(11),
     nome varchar(100),
     constraint PK_destino primary key (ID)
 );
 
-create table pacote( --ok
+create table pacote( 
     cod varchar(11),
     dtIda date,
     dtVolta date,
@@ -30,7 +30,7 @@ create table pacote( --ok
     constraint FK_pacote_destino foreign key (IDdestino) references destino on delete cascade
 );
 
-create table pacoteNacional( --ok
+create table pacoteNacional(  --ok
     codN varchar(11),
     valorRS number,
     constraint PK_pacoteNacional primary key (codN),
@@ -62,7 +62,7 @@ create table compra(
     constraint FK_compra_comprador foreign key (CPFcomprador) references comprador on delete cascade
 );
 
-create table hotel( --ok
+create table hotel( 
     ID varchar(11),
     IDdestino varchar(11),
     valor number,
@@ -70,22 +70,22 @@ create table hotel( --ok
     constraint FK_hotel_destino foreign key (IDdestino) references destino on delete cascade
 );
 
-create table bonificacao(
+create table bonificacao( 
     cod varchar(11),
     valor number,
     constraint PK_bonificacao primary key (cod)
 );
 
-create table funcionario(
+create table funcionario( 
     CPF varchar(11),
-    nome varchar(100),
+    nome varchar (100),
     salario number,
     chefe varchar(11),
     constraint PK_funcionario primary key (CPF),
     constraint FK_chefe_funcionario foreign key (chefe) references funcionario ON DELETE SET NULL
 );
 
-create table contatoFuncionario(
+create table contatoFuncionario( --ok
     CPF varchar(11),
     numeroContato varchar(14),
     constraint PK_contatoFuncionario primary key (CPF, numeroContato),
@@ -95,7 +95,7 @@ create table contatoFuncionario(
 create table vendido(
     codPacote varchar(11),
     CPFfuncionario varchar(11),
-    codBonificacao varchar(11) UNIQUE,
+    codBonificacao varchar(11),
     constraint PK_vendido primary key (codPacote, CPFfuncionario),
     constraint FK_vendido_pacote foreign key (codPacote) references pacote on delete cascade,
     constraint FK_vendido_funcionario foreign key (CPFfuncionario) references funcionario on delete cascade,
