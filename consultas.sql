@@ -53,10 +53,13 @@ where (chefe, salario) = (select f.chefe, max(f.salario)
 						  group by f.chefe);
 
 -- Subconsulta do tipo tabela
--- nome dos destinos que estao em algum pacote
-select d.nome
-from destino d
-where d.id in (select IDdestino from pacote where d.id=IDdestino);
+-- cpf de cada chefe e nome de seu funcionario mais bem pago
+select chefe, nome
+from funcionario
+where (chefe,salario) in (select f.chefe, max(f.salario)
+    						from funcionario f
+    						group by f.chefe)
+order by chefe;
 
 -- Operação de conjunto
 -- pacotes que foram vendidos pelo funcionario '2012' e '2014'
