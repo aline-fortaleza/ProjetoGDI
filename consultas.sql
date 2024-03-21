@@ -1,5 +1,5 @@
 -- Group by/Having 
--- Projetar número de funcionarios que venderam mais que 2 pacotes
+-- Projetar os funcionarios que venderam mais que 2 pacotes e quantos pacotes venderam
 select f.nome, count(*)
 from funcionario f inner join 
 vendido v on v.CPFfuncionario = f.CPF
@@ -7,7 +7,7 @@ group by f.nome
 having count(*) > 2;
 
 -- Junção interna
--- Pacotes vendidos por funcionarios
+-- Pacotes vendidos por funcionarios e quais funcionarios os venderam
 select f.nome, v.codPacote
 from funcionario f inner join 
 vendido v on v.CPFfuncionario = f.cpf;
@@ -49,6 +49,7 @@ select p.cod, p.dtIda, p.dtVolta, p.idDestino
 from pacote p inner join compra c
 on p.cod = c.codPacote
 where c.CPFcomprador = '1111';
+--
 
 -- Subconsulta do tipo tabela
 -- nome dos destinos que estao em algum pacote
