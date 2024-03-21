@@ -44,12 +44,13 @@ where h.valor >= all (select valor
 
 
 -- Subconsulta do tipo linha
---projetar cod, dtida, dtvolta e idDestino do pacote comprado pela pessoa de cpf '1111'
-select p.cod, p.dtIda, p.dtVolta, p.idDestino
-from pacote p inner join compra c
-on p.cod = c.codPacote
-where c.CPFcomprador = '1111';
---
+--projetar funcionar com maior salário que é chefiado pelo funcionário de CPF 2001
+select nome,CPF,salario
+from funcionario
+where (chefe, salario) = (select f.chefe, max(f.salario)
+    					  from funcionario f
+    					  where f.chefe = '2001'
+						  group by f.chefe);
 
 -- Subconsulta do tipo tabela
 -- nome dos destinos que estao em algum pacote
