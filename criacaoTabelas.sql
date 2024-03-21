@@ -80,7 +80,7 @@ create table funcionario(
     CPF varchar(11),
     nome varchar (100),
     salario number,
-    chefe varchar(11),
+    chefe varchar(11),    
     constraint PK_funcionario primary key (CPF),
     constraint FK_chefe_funcionario foreign key (chefe) references funcionario ON DELETE SET NULL
 );
