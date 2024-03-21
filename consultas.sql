@@ -36,10 +36,10 @@ where NOT EXISTS (select *
                 where o.codPacote = p.cod);
 
 -- Subconsulta do tipo escalar
--- Consultar codigo do hotel mais caro
+-- Consultar codigo do hotel mais barato
 select h.id
 from hotel h
-where h.valor >= all (select valor 
+where h.valor = (select MIN(valor)
                         from hotel);
 
 
