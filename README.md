@@ -2,7 +2,7 @@
 
 ## Banco de dados para cadeira de Gerenciamento de dados da informação. 
 
-###Equipe:
+### Equipe:
 
 -> Alice Buarque Cadete @alicecadete28
 
